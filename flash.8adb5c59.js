@@ -148,7 +148,8 @@ var player = {
     '#btnPlay': 'play',
     '#btnSlow': 'slow',
     '#btnNormal': 'normal',
-    '#btnFast': 'fast'
+    '#btnFast': 'fast',
+    '#btnReload': 'reload'
   },
   n: 1,
   init: function init() {
@@ -164,7 +165,7 @@ var player = {
       if (player.events.hasOwnProperty(key)) {
         var value = player.events[key]; // pause / play / slow
 
-        document.querySelector(key).onclick = player[value];
+        document.querySelector(key).onclick = player[value]; //这是一个函数
       }
     }
   },
@@ -177,7 +178,7 @@ var player = {
 
     player.ui.demo.innerText = _stringCss.default.substring(0, player.n);
     player.ui.demo2.innerHTML = _stringCss.default.substring(0, player.n);
-    player.ui.demo.scrollTop = player.ui.demo.scrollHeight;
+    player.ui.demo.scrollTop = player.ui.demo.scrollHeight; //页面滚动位置为滚动条高度（页面拉底状态）
   },
   play: function play() {
     window.clearInterval(player.id); //播放即销毁定时器后重新安装定时器
@@ -201,6 +202,12 @@ var player = {
   fast: function fast() {
     player.pause();
     player.time = 0;
+    player.play();
+  },
+  reload: function reload() {
+    player.pause();
+    player.time = 100;
+    player.n = 1;
     player.play();
   }
 };
@@ -233,7 +240,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55984" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62393" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
